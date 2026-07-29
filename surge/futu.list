@@ -25,6 +25,7 @@ IP-CIDR,43.153.191.0/24,no-resolve
 IP-CIDR,43.153.233.0/24,no-resolve
 IP-CIDR,43.153.234.107/32,no-resolve
 IP-CIDR,43.153.249.33/32,no-resolve
+IP-CIDR,43.156.222.165/32,no-resolve
 IP-CIDR,43.160.156.0/24,no-resolve
 IP-CIDR,43.162.221.26/32,no-resolve
 IP-CIDR,43.162.222.125/32,no-resolve
