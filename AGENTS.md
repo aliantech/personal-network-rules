@@ -63,3 +63,10 @@ node scripts/validate-rules.mjs
 ## Logging
 
 For rule changes, update `README.md` only when usage changes. For operational governance changes, record the summary in Yasin Brain monthly logs.
+
+<!-- BEGIN YASIN BRAIN EXPERIENCE REVIEW -->
+## End-of-Task Experience Gate
+
+- substantial engineering task 完成前必须执行 Yasin Brain 根 `AGENTS.md` 的 End-of-Task Protocol；触发条件只由根协议维护，本文件不复制。
+- 项目专属经验优先更新本仓库现有 known issues、decision、runbook、test 或 schema guardrail；跨项目候选才进入 Yasin Brain。没有新知识时报告 `no_op`，不得为了完成 gate 创建 Markdown。
+<!-- END YASIN BRAIN EXPERIENCE REVIEW -->
