@@ -1,58 +1,49 @@
-# ftrading
+# Personal Network Rules
 
-Futu trading and personal business network rules for Surge and Clash.
+自用网络分流与业务服务规则，提供 Surge 和 Clash/Mihomo 两种格式。规则集只定义匹配条件，实际出口由各设备配置中的策略决定。
 
-## Files
+## 规则分类
 
-- `surge/futu.list`: Surge rule set.
-- `clash/futu.yaml`: Clash provider payload.
-- `surge/judgeme.list`: Judge.me business services.
-- `surge/google-analytics-ui.list`: Google Analytics administration UI.
-- `clash/judgeme.yaml` and `clash/google-analytics-ui.yaml`: matching Clash/Mihomo providers.
+| 分类 | 内容 | Surge | Clash/Mihomo |
+| --- | --- | --- | --- |
+| 金融交易 | 富途及相关服务 | [futu.list](surge/futu.list) | [futu.yaml](clash/futu.yaml) |
+| 商业服务 | Judge.me 及其子域 | [judgeme.list](surge/judgeme.list) | [judgeme.yaml](clash/judgeme.yaml) |
+| 数据分析 | Google Analytics 后台主机 | [google-analytics-ui.list](surge/google-analytics-ui.list) | [google-analytics-ui.yaml](clash/google-analytics-ui.yaml) |
+
+Analytics 规则仅匹配 `analytics.google.com`，不全局放行 `google-analytics.com` 或 `googletagmanager.com`。Judge.me 使用域名后缀匹配，覆盖其子域。规则需要放在广告拦截规则之前；如其他必要资源被拦截，应先确认具体域名和影响。
 
 ## Surge
 
-Use `surge/futu.list` as a remote rule set, then route the rule set to your target policy in Surge.
+将需要的规则放到 `[Rule]` 中、广告拦截规则之前，并将策略名称替换为设备实际存在的策略组：
 
 ```ini
-RULE-SET,https://github.com/aliantech/ftrading/raw/refs/heads/main/surge/futu.list,DIRECT
+RULE-SET,https://github.com/aliantech/personal-network-rules/raw/refs/heads/main/surge/futu.list,DIRECT
+RULE-SET,https://github.com/aliantech/personal-network-rules/raw/refs/heads/main/surge/judgeme.list,Proxy
+RULE-SET,https://github.com/aliantech/personal-network-rules/raw/refs/heads/main/surge/google-analytics-ui.list,Google
 ```
 
-The business lists are independent so that each can use its own policy. Place
-them before ad-blocking rules and replace the policy names with groups present
-in the profile:
+## Clash / Mihomo
 
-```ini
-RULE-SET,https://github.com/aliantech/ftrading/raw/refs/heads/main/surge/judgeme.list,Proxy
-RULE-SET,https://github.com/aliantech/ftrading/raw/refs/heads/main/surge/google-analytics-ui.list,Google
-```
-
-The Analytics list covers exactly `analytics.google.com`. It
-does not globally allow `google-analytics.com` or `googletagmanager.com`;
-individual features may still require further investigation.
-
-## Clash
-
-Use `clash/futu.yaml` as a classical rule provider:
+使用 `classical` 类型的 YAML rule provider，并按需引用。策略名称必须在本机配置中存在。
 
 ```yaml
 rule-providers:
   futu:
     type: http
     behavior: classical
-    url: https://github.com/aliantech/ftrading/raw/refs/heads/main/clash/futu.yaml
+    url: https://github.com/aliantech/personal-network-rules/raw/refs/heads/main/clash/futu.yaml
     path: ./ruleset/futu.yaml
     interval: 86400
   judgeme:
     type: http
     behavior: classical
-    url: https://github.com/aliantech/ftrading/raw/refs/heads/main/clash/judgeme.yaml
+    url: https://github.com/aliantech/personal-network-rules/raw/refs/heads/main/clash/judgeme.yaml
     path: ./ruleset/judgeme.yaml
     interval: 86400
   google-analytics-ui:
     type: http
     behavior: classical
-    url: https://github.com/aliantech/ftrading/raw/refs/heads/main/clash/google-analytics-ui.yaml
+    url: https://github.com/aliantech/personal-network-rules/raw/refs/heads/main/clash/google-analytics-ui.yaml
     path: ./ruleset/google-analytics-ui.yaml
     interval: 86400
 
@@ -62,13 +53,10 @@ rules:
   - RULE-SET,futu,DIRECT
 ```
 
-Place business rules before ad-blocking rules, and use policy names defined in
-your own configuration. The `.yaml` files are classical rule providers; other
-clients must support that format or use the plain Surge rule-set files as a
-source for conversion. Compatibility with other clients is not verified.
+其他客户端需要支持上述格式或自行转换；其兼容性未验证。
 
-## Validate
+## 维护与验证
 
-```bash
-node scripts/validate-rules.mjs
-```
+- `surge/` 与 `clash/` 按文件名对应；现有路径不得随意移动，以免影响已接入设备。
+- 不提交代理凭据、订阅地址、私人端点或账户标识。
+- 修改规则后运行 `node scripts/validate-rules.mjs`，检查规则格式及跨格式一致性。

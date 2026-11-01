@@ -1,4 +1,4 @@
-# ftrading Agent Protocol
+# Personal Network Rules Agent Protocol
 
 ## Operating Principles
 
@@ -41,16 +41,16 @@
 
 ## Project Identity
 
-- Runtime repo: `/home/yasin/workspace/ftrading`.
-- GitHub: `https://github.com/aliantech/ftrading`.
-- Purpose: Futu trading and personal business network rules for Surge and Clash.
+- Existing runtime checkout: `/home/yasin/workspace/ftrading` (legacy directory name; verify before use).
+- GitHub: `https://github.com/aliantech/personal-network-rules`.
+- Purpose: Personal network routing and business-service rule sets for Surge and Clash-compatible clients.
 
 ## Boundaries
 
 - This repo is network routing rules only; do not add trading logic, broker automation, credentials, or account operations.
 - Do not add secrets, API keys, tokens, proxy credentials, private endpoints, or personal account identifiers.
 - Keep Surge rule sets in `surge/` and corresponding Clash provider payloads in `clash/`.
-- Do not change published raw GitHub URLs in `README.md` unless the repository or branch actually changes.
+- Preserve published file paths and verify existing client URLs when changing the repository or branch.
 
 ## Verification
 
