@@ -1,2 +1,2 @@
 # Google Analytics administration UI; do not allow tracking domains globally.
-DOMAIN-SUFFIX,analytics.google.com
+DOMAIN,analytics.google.com

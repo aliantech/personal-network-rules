@@ -31,9 +31,9 @@ const validateRule = (rule, source) => {
     return;
   }
 
-  if (type === "DOMAIN-SUFFIX") {
+  if (type === "DOMAIN" || type === "DOMAIN-SUFFIX") {
     if (parts.length !== 2 || !isValidDomain(parts[1])) {
-      throw new Error(`${source}: invalid DOMAIN-SUFFIX rule: ${rule}`);
+      throw new Error(`${source}: invalid ${type} rule: ${rule}`);
     }
     return;
   }

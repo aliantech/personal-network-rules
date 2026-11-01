@@ -26,7 +26,7 @@ RULE-SET,https://github.com/aliantech/ftrading/raw/refs/heads/main/surge/judgeme
 RULE-SET,https://github.com/aliantech/ftrading/raw/refs/heads/main/surge/google-analytics-ui.list,Google
 ```
 
-The Analytics list covers `analytics.google.com` and its subdomains only. It
+The Analytics list covers exactly `analytics.google.com`. It
 does not globally allow `google-analytics.com` or `googletagmanager.com`;
 individual features may still require further investigation.
 
