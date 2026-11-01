@@ -49,7 +49,7 @@
 
 - This repo is network routing rules only; do not add trading logic, broker automation, credentials, or account operations.
 - Do not add secrets, API keys, tokens, proxy credentials, private endpoints, or personal account identifiers.
-- Keep Surge rule sets in `surge/` and the Futu Clash provider payload in `clash/futu.yaml`.
+- Keep Surge rule sets in `surge/` and corresponding Clash provider payloads in `clash/`.
 - Do not change published raw GitHub URLs in `README.md` unless the repository or branch actually changes.
 
 ## Verification

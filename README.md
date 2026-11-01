@@ -8,6 +8,7 @@ Futu trading and personal business network rules for Surge and Clash.
 - `clash/futu.yaml`: Clash provider payload.
 - `surge/judgeme.list`: Judge.me business services.
 - `surge/google-analytics-ui.list`: Google Analytics administration UI.
+- `clash/judgeme.yaml` and `clash/google-analytics-ui.yaml`: matching Clash/Mihomo providers.
 
 ## Surge
 
@@ -42,10 +43,29 @@ rule-providers:
     url: https://github.com/aliantech/ftrading/raw/refs/heads/main/clash/futu.yaml
     path: ./ruleset/futu.yaml
     interval: 86400
+  judgeme:
+    type: http
+    behavior: classical
+    url: https://github.com/aliantech/ftrading/raw/refs/heads/main/clash/judgeme.yaml
+    path: ./ruleset/judgeme.yaml
+    interval: 86400
+  google-analytics-ui:
+    type: http
+    behavior: classical
+    url: https://github.com/aliantech/ftrading/raw/refs/heads/main/clash/google-analytics-ui.yaml
+    path: ./ruleset/google-analytics-ui.yaml
+    interval: 86400
 
 rules:
+  - RULE-SET,judgeme,Proxy
+  - RULE-SET,google-analytics-ui,Google
   - RULE-SET,futu,DIRECT
 ```
+
+Place business rules before ad-blocking rules, and use policy names defined in
+your own configuration. The `.yaml` files are classical rule providers; other
+clients must support that format or use the plain Surge rule-set files as a
+source for conversion. Compatibility with other clients is not verified.
 
 ## Validate
 

@@ -1,9 +1,6 @@
 import fs from "node:fs";
 import net from "node:net";
 
-const surgePath = "surge/futu.list";
-const clashPath = "clash/futu.yaml";
-
 const readLines = (path) =>
   fs
     .readFileSync(path, "utf8")
@@ -41,28 +38,25 @@ const validateRule = (rule, source) => {
   throw new Error(`${source}: unsupported rule type: ${rule}`);
 };
 
-const surgeRules = readLines(surgePath);
-surgeRules.forEach((rule) => validateRule(rule, surgePath));
+for (const name of ["futu", "judgeme", "google-analytics-ui"]) {
+  const surgePath = `surge/${name}.list`;
+  const clashPath = `clash/${name}.yaml`;
+  const surgeRules = readLines(surgePath);
+  surgeRules.forEach((rule) => validateRule(rule, surgePath));
 
-const clashLines = readLines(clashPath);
-if (clashLines[0] !== "payload:") {
-  throw new Error(`${clashPath}: first non-comment line must be payload:`);
-}
-
-const clashRules = clashLines.slice(1).map((line) => {
-  if (!line.startsWith("- ")) {
-    throw new Error(`${clashPath}: payload item must start with "- ": ${line}`);
+  const clashLines = readLines(clashPath);
+  if (clashLines[0] !== "payload:") {
+    throw new Error(`${clashPath}: first non-comment line must be payload:`);
   }
-  return line.slice(2);
-});
-clashRules.forEach((rule) => validateRule(rule, clashPath));
-
-if (surgeRules.join("\n") !== clashRules.join("\n")) {
-  throw new Error("Surge and Clash rule lists differ");
+  const clashRules = clashLines.slice(1).map((line) => {
+    if (!line.startsWith("- ")) {
+      throw new Error(`${clashPath}: payload item must start with "- ": ${line}`);
+    }
+    return line.slice(2);
+  });
+  clashRules.forEach((rule) => validateRule(rule, clashPath));
+  if (surgeRules.join("\n") !== clashRules.join("\n")) {
+    throw new Error(`${name}: Surge and Clash rule lists differ`);
+  }
+  console.log(`Validated ${name}: ${surgeRules.length} rules`);
 }
-
-for (const path of ["surge/judgeme.list", "surge/google-analytics-ui.list"]) {
-  readLines(path).forEach((rule) => validateRule(rule, path));
-}
-
-console.log(`Validated ${surgeRules.length} rules`);
