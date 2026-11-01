@@ -61,4 +61,8 @@ if (surgeRules.join("\n") !== clashRules.join("\n")) {
   throw new Error("Surge and Clash rule lists differ");
 }
 
+for (const path of ["surge/judgeme.list", "surge/google-analytics-ui.list"]) {
+  readLines(path).forEach((rule) => validateRule(rule, path));
+}
+
 console.log(`Validated ${surgeRules.length} rules`);

@@ -43,13 +43,13 @@
 
 - Runtime repo: `/home/yasin/workspace/ftrading`.
 - GitHub: `https://github.com/aliantech/ftrading`.
-- Purpose: Futu trading network rules for Surge and Clash.
+- Purpose: Futu trading and personal business network rules for Surge and Clash.
 
 ## Boundaries
 
 - This repo is network routing rules only; do not add trading logic, broker automation, credentials, or account operations.
 - Do not add secrets, API keys, tokens, proxy credentials, private endpoints, or personal account identifiers.
-- Keep Surge rules in `surge/futu.list` and Clash provider payload in `clash/futu.yaml`.
+- Keep Surge rule sets in `surge/` and the Futu Clash provider payload in `clash/futu.yaml`.
 - Do not change published raw GitHub URLs in `README.md` unless the repository or branch actually changes.
 
 ## Verification
