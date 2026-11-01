@@ -12,6 +12,8 @@
 
 Analytics 规则仅匹配 `analytics.google.com`，不全局放行 `google-analytics.com` 或 `googletagmanager.com`。Judge.me 使用域名后缀匹配，覆盖其子域。规则需要放在广告拦截规则之前；如其他必要资源被拦截，应先确认具体域名和影响。
 
+现有覆盖、待验证候选和新增规则的判定依据见 [自定义规则审查](docs/rule-review.md)。
+
 ## Surge
 
 将需要的规则放到 `[Rule]` 中、广告拦截规则之前，并将策略名称替换为设备实际存在的策略组：
