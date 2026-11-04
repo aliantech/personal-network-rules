@@ -7,6 +7,7 @@
 | 分类 | 内容 | Surge | Clash/Mihomo |
 | --- | --- | --- | --- |
 | 金融交易 | 富途及相关服务 | [futu.list](surge/futu.list) | [futu.yaml](clash/futu.yaml) |
+| 行情与图表 | TradingView Desktop 观察到的服务主机 | [tradingview.list](surge/tradingview.list) | [tradingview.yaml](clash/tradingview.yaml) |
 | 商业服务 | Judge.me 及其子域 | [judgeme.list](surge/judgeme.list) | [judgeme.yaml](clash/judgeme.yaml) |
 | 数据分析 | Google Analytics 后台主机 | [google-analytics-ui.list](surge/google-analytics-ui.list) | [google-analytics-ui.yaml](clash/google-analytics-ui.yaml) |
 
@@ -20,6 +21,7 @@ Analytics 规则仅匹配 `analytics.google.com`，不全局放行 `google-analy
 
 ```ini
 RULE-SET,https://github.com/aliantech/personal-network-rules/raw/refs/heads/main/surge/futu.list,DIRECT
+RULE-SET,https://github.com/aliantech/personal-network-rules/raw/refs/heads/main/surge/tradingview.list,Proxy
 RULE-SET,https://github.com/aliantech/personal-network-rules/raw/refs/heads/main/surge/judgeme.list,Proxy
 RULE-SET,https://github.com/aliantech/personal-network-rules/raw/refs/heads/main/surge/google-analytics-ui.list,Google
 ```
@@ -30,6 +32,12 @@ RULE-SET,https://github.com/aliantech/personal-network-rules/raw/refs/heads/main
 
 ```yaml
 rule-providers:
+  tradingview:
+    type: http
+    behavior: classical
+    url: https://github.com/aliantech/personal-network-rules/raw/refs/heads/main/clash/tradingview.yaml
+    path: ./ruleset/tradingview.yaml
+    interval: 86400
   futu:
     type: http
     behavior: classical
@@ -50,6 +58,7 @@ rule-providers:
     interval: 86400
 
 rules:
+  - RULE-SET,tradingview,Proxy
   - RULE-SET,judgeme,Proxy
   - RULE-SET,google-analytics-ui,Google
   - RULE-SET,futu,DIRECT

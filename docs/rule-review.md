@@ -5,6 +5,7 @@
 | 分类 | 服务 | 状态 | 判断 |
 | --- | --- | --- | --- |
 | 金融 | 富途 | 已维护 | Surge 与 Clash 规则保持一致；出口由设备配置决定。 |
+| 行情与图表 | TradingView Desktop | 候选，待客户端验证 | 基于 Surge 面板 2026-11-04 可见请求，使用精确主机匹配；记录有限，不能保证覆盖所有功能。排除被拦截的 `snowplow-pixel.tradingview.com`，不改变既有广告或统计拦截。官方帮助确认 `pricealerts.tradingview.com` 用于警报服务。 |
 | 商业 | Judge.me | 已维护 | `judge.me` 及子域用于业务服务；Judge.me 官方文档确认其组件使用该域名下的 CDN。 |
 | 分析 | Google Analytics 后台 | 已维护 | 只匹配 `analytics.google.com` 主机，不全局放行数据采集或标签管理域名。 |
 | 分析 | Google Marketing Platform | 待验证 | `marketingplatform.google.com` 是 Google 官方管理入口，公开 anti-AD 列表包含该主机。仅在实际后台受阻并确认需要时考虑精确 `DOMAIN` 例外。 |
@@ -21,6 +22,7 @@
 
 ## 参考
 
+- [TradingView 警报连接排查](https://www.tradingview.com/support/solutions/43000732768-errors-when-creating-loading-alerts/)
 - [Judge.me 集成与 CDN](https://judge.me/help/en/articles/8278390-build-integrations-with-judge-me)
 - [Google Marketing Platform 登录](https://support.google.com/marketingplatform/answer/9013750?hl=en)
 - [Shopify 后台](https://help.shopify.com/en/manual/shopify-admin)
