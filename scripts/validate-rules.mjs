@@ -38,7 +38,7 @@ const validateRule = (rule, source) => {
   throw new Error(`${source}: unsupported rule type: ${rule}`);
 };
 
-for (const name of ["futu", "judgeme", "google-analytics-ui"]) {
+for (const name of ["futu", "judgeme", "google-analytics-ui", "tradingview"]) {
   const surgePath = `surge/${name}.list`;
   const clashPath = `clash/${name}.yaml`;
   const surgeRules = readLines(surgePath);
